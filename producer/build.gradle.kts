@@ -1,5 +1,13 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
+buildscript {
+	dependencies {
+		classpath("com.commercehub.gradle.plugin:gradle-avro-plugin:0.15.0")
+	}
+}
+
+apply(plugin="com.commercehub.gradle.plugin.avro")
+
 plugins {
 	id("org.springframework.boot") version "2.3.1.RELEASE"
 	id("io.spring.dependency-management") version "1.0.9.RELEASE"
@@ -13,6 +21,7 @@ java.sourceCompatibility = JavaVersion.VERSION_11
 
 repositories {
 	mavenCentral()
+	maven { setUrl("http://packages.confluent.io/maven/") }
 }
 
 dependencies {
@@ -21,6 +30,8 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	implementation("org.springframework.kafka:spring-kafka")
+	implementation("org.apache.avro:avro:1.8.2")
+	implementation("io.confluent:kafka-avro-serializer:5.3.0")
 	testImplementation("org.springframework.boot:spring-boot-starter-test") {
 		exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
 	}

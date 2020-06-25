@@ -1,0 +1,19 @@
+{
+    "type" : "record",
+    "name" : "Cliente",
+    "namespace" : "com.example.api.entitie",
+    "fields" : [
+        {
+            "name" : "nome",
+            "type" : "string"
+        },
+        {
+            "name" : "cpf",
+            "type" : "int"
+        },
+        {
+            "name" : "dataNasc",
+            "type" : "string"
+        }
+    ]
+}
