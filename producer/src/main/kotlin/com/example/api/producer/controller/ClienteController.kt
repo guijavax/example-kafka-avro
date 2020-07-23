@@ -4,10 +4,7 @@ import com.example.api.entitie.Cliente
 import com.example.api.producer.dto.ClienteEntitieDTO
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.kafka.core.KafkaTemplate
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping(value=["/cliente"])
@@ -18,13 +15,13 @@ class ClienteController {
 
     private val topic = "cliente"
 
-    @GetMapping("/post")
+    @PostMapping("/post")
     fun postMessage(@RequestBody cliente : ClienteEntitieDTO) {
-        val cli: Cliente = Cliente.newBuilder()
-                .setNome(cliente.nome)
-                .setCpf(cliente.cpf)
-                .setDataNasc(cliente.dataNasc)
-                .build()
+        val cli = Cliente().apply {
+            nome = cliente.nome
+            cpf = cliente.cpf
+            dataNasc = cliente.dataNasc
+        }
         template.send(topic, cli)
     }
 }
