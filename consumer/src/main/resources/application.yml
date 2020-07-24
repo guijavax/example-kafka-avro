@@ -1,0 +1,13 @@
+spring:
+  kafka:
+    properties:
+      schema.registry.url: http://localhost:8082
+    consumer:
+      bootstrap-servers: localhost:9092
+      group-id: group_id
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
+server:
+  port: 8081
+
